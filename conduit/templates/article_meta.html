@@ -1,12 +1,17 @@
 <div class="article-meta">
+  <a href="{% url 'profile_detail' username=article.author.user.username %}">                  <!-- new -->
+    <img src="{{ article.author.image }}" alt="{{ article.author.user.username }}"/>           <!-- new -->
+  </a> 
     <div class="info">
-      <span class="author">
+      <a href="{% url 'profile_detail' username=article.author.user.username %}" class="author"> <!-- from <span class="author"> -->
         {{ article.author.user.username }}
-      </span>
+     
+    </a>
       <span class="date">
         {{ article.created_at|date:"D M d Y" }}
       </span>
     </div>
+    {% if user == article.author.user %}                        <!-- new -->
     <span>                                                           
       <a                                                             
         href="{% url 'editor_update' slug=article.slug %}"  
@@ -14,7 +19,8 @@
       >                                                               <!-- # -->
         <span class="ion-edit">                                       <!-- # -->
           Edit Article                                                <!-- # -->
-        </span>                                                       <!-- # -->
+        </span>      
+        {% endif %}                                                 <!-- new -->                                                 <!-- # -->
       </a>   
       {% include 'article_delete.html' %}                                                          <!-- # -->
     </span> 

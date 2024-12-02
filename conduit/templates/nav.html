@@ -11,17 +11,60 @@
       Home
     </a>
   </li>
-  <li class="nav-item">                                                             
-    {% url 'editor_create' as editor_create %}                                      
-    <a href="{{ editor_create }}"                                                   
-      rel="prefetch"                                                                
-      class="nav-link {% if request.path == editor_create %}active{% endif %}"      
-    >                                                                               
-      <span class="ion-compose">                                                    
-        New Post                                                                    
-      </span>                                                                       
-    </a>         
-        </li>
+  {% if user.is_authenticated %}                          <!-- new from here -->
+  <li class="nav-item">
+    {% url 'editor_create' as editor_create %}
+    <a
+      href="{{ editor_create }}"
+      rel="prefetch"
+      class="nav-link
+             {% if request.path == editor_create %}active{% endif %}"
+    >
+      <span class="ion-compose"> New Post </span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a href="{% url 'logout' %}" rel="prefetch" class="nav-link">
+      <span class="ion-log-out"></span>
+    </a>
+  </li>
+{% else %}
+  <li class="nav-item">
+    {% url 'login' as login %}
+    <a
+      href="{{ login }}"
+      rel="prefetch"
+      class="nav-link
+             {% if request.path == login %}active{% endif %}"
+    >
+      Sign in
+    </a>
+  </li>
+  <li class="nav-item">
+    {% url 'signup' as signup %}
+    <a
+      href="{{ signup }}"
+      rel="prefetch"
+      class="nav-link
+             {% if request.path == signup %}active{% endif %}"
+    >
+      Sign up
+    </a>
+  </li>
+  <li class="nav-item">                             <!-- new from here -->
+    {% url 'profile_detail' username=user.username as profile %}
+    <a
+      href="{{ profile }}"
+      rel="prefetch"
+      class="nav-link
+             {% if request.path == profile %}active{% endif %}"
+    >
+      <img src="{{ user.profile.image }}" class="user-pic" alt="{{ user.username }}">
+      {{ user.username }}
+    </a>
+  </li>
+{% endif %}  
+  
       </ul>
     </div>
   </nav>

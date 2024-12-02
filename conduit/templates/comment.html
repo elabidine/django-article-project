@@ -5,11 +5,18 @@
       </p>
     </div>
     <div class="card-footer">
-      <span class="comment-author">
-        {{ comment.author.user.username }}
-      </span>
+      <a href="{% url 'profile_detail' username=comment.author.user.username %}" class="comment-author">            <!-- new -->
+        <img src="{{ comment.author.image }}" class="comment-author-img" alt="{{ comment.author.user.username }}"/> <!-- new -->
+      </a>                                                                                                          <!-- new -->
+      <a href="{% url 'profile_detail' username=comment.author.user.username %}" class="comment-author">            <!-- from <span class="comment-author"> -->
+         
+             {{ comment.author.user.username }}
+            </a>  
       <span class="date-posted">
         {{ comment.created_at|date:"D M d Y" }}
       </span>
+      {% if user == comment.author.user %}    <!-- new -->
+        {% include 'comment_delete.html' %} 
+      {% endif %}  
     </div>
   </div>
