@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="home-page">
+    <div class="banner">
+      <div class="container">
+        <h1 class="logo-font">conduit</h1>
+        <p>A place to share your knowledge.</p>
+      </div>
+    </div>
+    <div class="container page">
+      <div class="row">
+        <div class="col-md-9">
+          {% comment %} {% if articles|length == "0" %}
+            <div class="article-preview">
+              No articles are here... yet.
+            </div>
+          {% else %}
+            <div>
+              {% for article in articles %}
+                <div class="article-preview">
+                  <div class="article-meta">
+                    <div class="info">
+                      <span class="author">
+                        {{ article.author.user.username }}
+                      </span>
+                      <span class="date">
+                        {{ article.created_at|date:"D M d Y" }}
+                      </span>
+                    </div>
+                  </div>
+                  <a href="" class="preview-link">
+                    <h1>{{ article.title }}</h1>
+                    <p>{{ article.description }}</p>
+                    <span>Read more...</span>
+                  </a>
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %} {% endcomment %}
+            {% include "article_list.html" %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
