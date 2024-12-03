@@ -23,6 +23,7 @@ services:
       POSTGRES_USER: userdb
       POSTGRES_PASSWORD: VmMldEEvNqo5q5SWHAG2yMLHeu3fFAkF
       POSTGRES_DB: db_tr8z
+      POSTGRES_NAME: db_tr8z
 
 volumes:
   postgres_data:
