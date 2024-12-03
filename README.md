@@ -21,7 +21,7 @@ To set up the project locally, follow the steps below:
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/your-project-name.git
+   git clone https://github.com/elabidine/django-article-project.git
    ```
 
 2. **Navigate to the project directory**:
