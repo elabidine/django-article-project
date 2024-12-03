@@ -1,14 +1,10 @@
 from django.urls import path
-from .views import Home,EditorCreateView,EditorUpdateView,EditorDeleteView,ArticleCommentView,CommentDeleteView
+from .views import Home,EditorCreateView,EditorUpdateView,EditorDeleteView,ArticleCommentView,CommentDeleteView,ArticleDetailView
 
 
 urlpatterns = [
     path("",Home.as_view(),name="home"),
-    #path(                                                                                           # to this
-    #    "article/<slug:slug>-<uuid:uuid>",                                                          #
-    #    ArticleDetailView.as_view(),                                                                #
-    #    name="article_detail",                                                                      #
-    #),
+   
     path("article/<slug:slug>", ArticleCommentView.as_view(), name="article_detail"),     # to this
     path("editor", EditorCreateView.as_view(), name="editor_create"),      
     

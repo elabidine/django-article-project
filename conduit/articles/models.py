@@ -2,7 +2,6 @@ import uuid
 from django.db import models
 from django.shortcuts import reverse
 
-from conduit.articles.utils import slug_uuid_generator
 # Create your models here.
 class Article(models.Model):
     uuid_field = models.UUIDField(default=uuid.uuid4, editable=False)          

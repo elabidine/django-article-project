@@ -23,15 +23,19 @@ class ArticleDetailView(DetailView):
         context["form"] = CommentCreateView().get_form_class()  # new
         return context    
     
-class EditorCreateView(CreateView):                                 # new
+class EditorCreateView(LoginRequiredMixin,CreateView):                                 # new
     """ View for creating articles."""                               #
                                                                     #
     model = Article                                                 #
     fields = ['title', 'description', 'body']                       #
     template_name = "editor.html"  
-    def form_valid(self, form):                         # new
-        self.object.author = self.request.user.profile  #
-        return super().form_valid(form)  
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)           # new
+        self.object.author = self.request.user.profile
+        self.object.save()                              # new
+        return super().form_valid(form)
+  
 
 class EditorUpdateView(LoginRequiredMixin,UpdateView):
     """View for editing articles."""
@@ -69,24 +73,18 @@ class CommentCreateView(LoginRequiredMixin,CreateView):
     model = Comment
     fields = ["body"]
     template_name = "article_detail.html"
-
     def form_valid(self, form):
-        form.instance.author = self.request.user.profile
-        form.instance.article = Article.objects.filter(
-            slug=self.kwargs.get("slug")
-        ).first()
-        return super().form_valid(form)
-
+            form.instance.author = self.request.user.profile
+            form.instance.article = get_object_or_404(Article, slug=self.kwargs.get("slug"))
+            return super().form_valid(form)
+    
+   
+    
     def get_success_url(self):
+        print(f"Article==================================================>: {self.object.article}") 
         return reverse(
             "article_detail", kwargs={"slug": self.object.article.slug}
         )
-    
-    def post(self, request, *args, **kwargs):
-        if request.user == self.get_object().author.user:
-            return super().post(request, *args, **kwargs)
-        return redirect(self.get_object().get_absolute_url())
-    
 class ArticleCommentView(LoginRequiredMixin,View):
     """View for viewing articles and posting comments."""
 

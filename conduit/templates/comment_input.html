@@ -1,6 +1,6 @@
 <form
     method="post"
-    action="{% url 'article_detail' slug=object.slug %}"
+    action="{% url 'article_detail' slug=article.slug %}"
     class="card comment-form"
 >
   {% csrf_token %}
