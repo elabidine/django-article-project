@@ -43,7 +43,7 @@ class User(AbstractUser):
     objects = CustomUserManager() 
 
     def __str__(self):
-        self.email
+        return self.email
 
 
 class Profile(models.Model):

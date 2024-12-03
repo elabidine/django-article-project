@@ -10,6 +10,4 @@ class ProfileInline(admin.StackedInline):
 
 class UserAdmin(admin.ModelAdmin):
     inlines = [ProfileInline]
-
-
 admin.site.register(User, UserAdmin)
