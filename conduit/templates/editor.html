@@ -38,6 +38,7 @@
                   placeholder="Write your article (in markdown)"
                   name="{{ form.body.name }}"
                   {{ form.body.value|default_if_none:'' }}
+                  value="{{ form.description.value|default_if_none:'' }}"
                 ></textarea>
               </fieldset>
               {{ form.body.errors }}
