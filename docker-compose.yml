@@ -8,22 +8,7 @@ services:
       - .:/app
     ports:
       - "8000:8000"
-    depends_on:
-      - db
     environment:
       - DEBUG=True
-      - DATABASE_URL=postgresql://userdb:VmMldEEvNqo5q5SWHAG2yMLHeu3fFAkF@dpg-ct7k4v56l47c738jgst0-a.ohio-postgres.render.com/db_tr8z
 
-  db:
-    image: postgres:16
-    restart: always
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: userdb
-      POSTGRES_PASSWORD: VmMldEEvNqo5q5SWHAG2yMLHeu3fFAkF
-      POSTGRES_DB: db_tr8z
-      POSTGRES_NAME: db_tr8z
 
-volumes:
-  postgres_data:
