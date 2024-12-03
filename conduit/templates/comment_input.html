@@ -7,12 +7,14 @@
   <div class="card-block">
     <textarea
         class="form-control"
+        required
         rows="3"
         placeholder="Write a comment..."
         name="{{ form.body.name }}"
     >{{ form.body.value|default_if_none:'' }}</textarea>
   </div>
-  <div class="card-footer">
+  <div class="card-footer" style="dislay:flex;justify-content:center"> 
+    
     <button class="btn btn-sm btn-primary" type="submit">
       Post Comment
     </button>
