@@ -5,11 +5,15 @@ from .models import Profile
 
 
 @receiver(post_save, sender=get_user_model())
-def create_profile_for_user(sender, instance, created, **kwargs):
+def manage_profile_for_user(sender, instance, created, **kwargs):
+    """
+    Signal to manage user profile creation and saving.
+    If a user is created, create a corresponding profile.
+    On every save, also save the profile to ensure it's up to date.
+    """
     if created:
+        # Create a profile for the newly created user
         Profile.objects.create(user=instance)
-
-
-@receiver(post_save, sender=get_user_model())
-def save_profile_for_user(sender, instance, **kwargs):
-    instance.profile.save()
+    else:
+        # Save the existing profile to ensure consistency
+        instance.profile.save()
