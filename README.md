@@ -16,6 +16,13 @@ The application is structured to provide seamless interactions between authors a
 - **Access Control**: Only the authors can edit or delete their articles and comments.
 
 ## Installation
+   
+### Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+- Basic knowledge of the command line.
+
 
 To set up the project locally, follow the steps below:
 
@@ -26,45 +33,49 @@ To set up the project locally, follow the steps below:
 
 2. **Navigate to the project directory**:
    ```bash
-   cd your-project-name
+   cd django-article-project
    ```
 
-3. **Create a virtual environment**:
+3. **Build and run the Docker containers**:
+   ```bash
+   docker-compose up --build -d
+   ```
+4. **Apply migrations**:
+   Once the containers are running, open a new terminal and run:
+   ```bash
+   docker-compose exec web python manage.py migrate
+   ```
+
+5. **Create a superuser** (for admin access):
+   ```bash
+   docker-compose exec web python manage.py createsuperuser
+   ```
+
+6. **Access the application**:
+   - Open your browser and navigate to: `http://localhost:8000`
+   - Admin panel: `http://localhost:8000/admin`
+
+## Local Development Setup (Optional)
+
+If you prefer not to use Docker, you can set up the project manually:
+
+1. Install Python.
+
+2. Create a virtual environment:
    ```bash
    python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
-
-4. **Activate the virtual environment**:
-   - On Windows:
-     ```bash
-     .env\Scripts\activate
-     ```
-   - On macOS/Linux:
-     ```bash
-     source venv/bin/activate
-     ```
-
-5. **Install dependencies**:
+3. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
-
-6. **Run Migrations**:
-   ```bash
-   python manage.py migrate
-   ```
-
-7. **Create a Superuser**:
-   ```bash
-   python manage.py createsuperuser
-   ```
-
-8. **Start the development server**:
+4. Run the project:
    ```bash
    python manage.py runserver
    ```
 
-Visit `http://127.0.0.1:8000` to interact with the application.
+---
 
 ## Usage
 
