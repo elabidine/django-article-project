@@ -6,12 +6,15 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 class Home(ListView):
+    """ View for Home""" 
     
     template_name = 'home.html'
     queryset = Article.objects.order_by('-created_at')
     context_object_name = "articles"
 
 class ArticleDetailView(DetailView):
+    """ View for articles detail.""" 
+    
     model = Article
     template_name = "article_detail.html"
     def get_object(self):                                                       
